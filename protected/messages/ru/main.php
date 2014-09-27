@@ -20,6 +20,7 @@ return array(
     'Operations'=>'Операции',
     'Username'=>'Логин',
     'Password'=>'Пароль',
+    'Confirm password'=>'Подтверждение пароля',
     'Users'=>'Пользователи',
     'Home'=>'Главная',
     'About'=>'О нас',

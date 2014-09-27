@@ -87,19 +87,28 @@ class UserController extends Controller
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
-
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
+                $modelPassword = new ChangeUserPassword();
+                
 		if(isset($_POST['User']))
 		{
 			$model->attributes=$_POST['User'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
+                
+                if(isset($_POST['ChangeUserPassword'])) {
+                    $modelPassword->attributes = $_POST['ChangeUserPassword'];
+                    if ($modelPassword->validate()) {
+                        $model->password = User::passwordHash($modelPassword->password);
+                        $model->save();
+                        Yii::app()->user->setFlash('passwordChange','Password changed.');				
+                        $this->refresh();
+                    }
+                }
 
 		$this->render('update',array(
 			'model'=>$model,
+                        'modelPassword'=>$modelPassword,
 		));
 	}
 
