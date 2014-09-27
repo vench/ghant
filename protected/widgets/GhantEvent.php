@@ -82,7 +82,7 @@ class GhantEvent extends CWidget {
         $cs->registerScript(__CLASS__.'#'.$this->id,
                 ' 
                  gantt.locale.labels.section_executor = "executor";
-   
+                 gantt.config.scale_height = 24;
                  gantt.config.lightbox.sections.push(
                   {name: "executor", height: 22, map_to: "executor", type: "select", 
                   options:  '.$users.' }

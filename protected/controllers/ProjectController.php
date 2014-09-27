@@ -28,7 +28,7 @@ class ProjectController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view', 'ajaxList'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -44,6 +44,38 @@ class ProjectController extends Controller
 			),
 		);
 	}
+        
+        /**
+         * 
+         */
+        public function actionAjaxList($start, $end) {
+            $user_id = Yii::app()->user->getId();
+            $tasks = Task::model()->findAll(array(
+                'condition'=>'(project.user_id = :user_id OR t.executor =:user_id1 )',
+                'params'=>array(
+                   // ':end'=>date('Y-m-d', $end),
+                    ':user_id'=>$user_id,
+                    ':user_id1'=>$user_id,
+                ),
+                'with'=>array(
+                    'project'=>array(
+                        'select'=>FALSE,
+                    ),
+                ),
+            ));
+            $data=array($user_id);
+            foreach($tasks as $task) {
+                $date = strtotime($task->start_date);
+                $data[] = array(
+                    'title'=>$task->description,
+                    'start'=>$date,
+                    'end'=>($date + ($task->duration * 86400)),
+                    'url'=>$this->createUrl('/project/view', array('id'=>$task->project_id)),
+                );
+            }
+             echo CJSON::encode($data);
+             Yii::app()->end();
+        }
 
 	/**
 	 * Displays a particular model.

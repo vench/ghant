@@ -102,4 +102,13 @@ class User extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+        
+        /**
+         * 
+         * @param string $string
+         * @return string
+         */
+        public static function passwordHash($string) {
+            return MD5($string);
+        }
 }

@@ -3,13 +3,13 @@
 /* @var $model ContactForm */
 /* @var $form CActiveForm */
 
-$this->pageTitle=Yii::app()->name . ' - Contact Us';
+$this->pageTitle=Yii::app()->name . ' - '. Yii::t('main', 'Contact Us');
 $this->breadcrumbs=array(
-	'Contact',
+	Yii::t('main', 'Contacts'),
 );
 ?>
 
-<h1>Contact Us</h1>
+<h1><?php echo Yii::t('main', 'Contact Us');?></h1>
 
 <?php if(Yii::app()->user->hasFlash('contact')): ?>
 
@@ -33,7 +33,8 @@ If you have business inquiries or other questions, please fill out the following
 	),
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+	<p class="note"><?php echo Yii::t('main', 'Fields with {sim} are required.', array('{sim}'=>'<span class="required">*</span>'));?></p>
+
 
 	<?php echo $form->errorSummary($model); ?>
 

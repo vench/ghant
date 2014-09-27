@@ -51,10 +51,10 @@ class Link extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'source' => 'Source',
-			'target' => 'Target',
-			'type' => 'Type',
+			'id' => Yii::t('main','ID'),
+			'source' => Yii::t('main','Link Source'),
+			'target' => Yii::t('main','Link Target'),
+			'type' => Yii::t('main','Link Type'),
 		);
 	}
 

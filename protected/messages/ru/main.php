@@ -8,6 +8,7 @@
 
 return array(
     'Login'=>'Вход в систему',
+    'Logout ({name})'=>'Выйдти ({name})', 
     'Remember me next time'=>'Запомнить меня',
     'Enter'=>'Войти',
     'Projects'=>'Проекты',
@@ -17,6 +18,13 @@ return array(
     'Create'=>'Создать',
     'Save'=>'Сохранить',
     'Operations'=>'Операции',
+    'Username'=>'Логин',
+    'Password'=>'Пароль',
+    'Users'=>'Пользователи',
+    'Home'=>'Главная',
+    'About'=>'О нас',
+    'Contacts'=>'Контакты',
+    'Contact Us'=>'Контакты',
     
     'Project user'=>'Автор проекта',
     'Project name'=>'Название проекта',
@@ -24,4 +32,5 @@ return array(
     'View Project'=>'Просмотр проекта',
     'Update Project'=>'Редактировать проект',
     'Delete Project'=>'Удалить проект',
+    'List Project'=>'Список проектов',
 );

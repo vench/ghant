@@ -49,6 +49,7 @@ class Task extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+                    'project'=>array(self::BELONGS_TO, 'Project', 'project_id'),
 		);
 	}
 
@@ -58,15 +59,15 @@ class Task extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'project_id' => 'Project',
-			'start_date' => 'Start Date',
-			'description' => 'Description',
-			'progress' => 'Progress',
-			'duration' => 'Duration',
-			'parent_id' => 'Parent',
-			'sortorder' => 'Sortorder',
-			'executor' => 'Executor',
+			'id' => Yii::t('main','ID'),
+			'project_id' => Yii::t('main','Task Project'),
+			'start_date' => Yii::t('main','Task Start Date'),
+			'description' => Yii::t('main','Task Description'),
+			'progress' => Yii::t('main','Task Progress'),
+			'duration' => Yii::t('main','Task Duration'),
+			'parent_id' => Yii::t('main','Task Parent'),
+			'sortorder' => Yii::t('main','Task Sortorder'),
+			'executor' => Yii::t('main','Task Executor'),
 		);
 	}
 
