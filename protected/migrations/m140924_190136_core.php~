@@ -1,0 +1,42 @@
+<?php
+
+class m140924_190136_core extends CDbMigration
+{
+	public function up()
+	{
+		  $this->createTable('tbl_user', array(
+		    'id' => 'pk',
+		    'name' => 'string NOT NULL',
+		    'login' => 'string NOT NULL',
+		    'password' => 'string NOT NULL',	
+		));
+
+  		$this->createTable('tbl_event', array(
+		    'id' => 'pk',
+		    'user_id' => 'int',
+		    'name' => 'string NOT NULL',
+		    'date' => 'date',	
+		    'duration' => 'int',
+                    'status' => 'int',
+		));
+
+		$this->addForeignKey('FK_news', 'tbl_post', 'news_id', 'tbl_news', 'id');
+	}
+
+	public function down()
+	{
+		echo "m140924_190136_core does not support migration down.\n";
+		return false;
+	}
+
+	/*
+	// Use safeUp/safeDown to do migration with transaction
+	public function safeUp()
+	{
+	}
+
+	public function safeDown()
+	{
+	}
+	*/
+}
