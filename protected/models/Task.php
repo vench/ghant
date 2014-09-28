@@ -13,6 +13,7 @@
  * @property integer $parent_id
  * @property integer $sortorder
  * @property integer $executor
+ * @property string end_date
  */
 class Task extends CActiveRecord
 {
@@ -34,7 +35,7 @@ class Task extends CActiveRecord
 		return array(
 			array('project_id, duration, parent_id, sortorder, executor', 'numerical', 'integerOnly'=>true),
 			array('progress', 'numerical'),
-			array('start_date, description', 'safe'),
+			array('start_date, end_date, description', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, project_id, start_date, description, progress, duration, parent_id, sortorder, executor', 'safe', 'on'=>'search'),
@@ -60,14 +61,15 @@ class Task extends CActiveRecord
 	{
 		return array(
 			'id' => Yii::t('main','ID'),
-			'project_id' => Yii::t('main','Task Project'),
-			'start_date' => Yii::t('main','Task Start Date'),
-			'description' => Yii::t('main','Task Description'),
-			'progress' => Yii::t('main','Task Progress'),
-			'duration' => Yii::t('main','Task Duration'),
-			'parent_id' => Yii::t('main','Task Parent'),
-			'sortorder' => Yii::t('main','Task Sortorder'),
-			'executor' => Yii::t('main','Task Executor'),
+			'project_id' => Yii::t('main','Task project'),
+			'start_date' => Yii::t('main','Task start Date'),
+			'description' => Yii::t('main','Task description'),
+			'progress' => Yii::t('main','Task progress'),
+			'duration' => Yii::t('main','Task duration'),
+			'parent_id' => Yii::t('main','Task parent'),
+			'sortorder' => Yii::t('main','Task sortorder'),
+			'executor' => Yii::t('main','Task executor'),
+                        'end_date'=>Yii::t('main', 'Task end date'),
 		);
 	}
 
@@ -103,6 +105,26 @@ class Task extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+        
+        /**
+         * 
+         * @return bolean
+         */
+        protected function beforeSave() {
+            $this->start_date = date('Y-m-d H:i', strtotime($this->start_date));
+            $this->end_date = date('Y-m-d H:i', strtotime($this->end_date));            
+            return parent::beforeSave();
+        }
+        
+        /**
+         * 
+         * @return type
+         */
+        protected function afterFind() {
+            $this->start_date = date('d-m-Y H:i', strtotime($this->start_date));
+            $this->end_date = date('d-m-Y H:i', strtotime($this->end_date));
+            return parent::afterFind();
+        }
 
 	/**
 	 * Returns the static model of the specified AR class.

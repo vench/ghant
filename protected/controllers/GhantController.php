@@ -1,10 +1,5 @@
 <?php
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+ 
 
 /**
  * Description of GhantController
@@ -31,9 +26,15 @@ class GhantController extends Controller {
             'params'=>array(
                 ':project_id'=>$pid,
             ),
+            'with'=>array(
+                'project'=>array(
+                    'select'=>'user_id',
+                ),
+            ),
         ));
         $userId = Yii::app()->user->getId();
         foreach($models as $model) {
+            $onwer = $model->project->user_id == $userId;
             $tasks[] = array(
                 'id'=>$model->getPrimaryKey(),
                 'text'=>$model->description,
@@ -44,7 +45,8 @@ class GhantController extends Controller {
                 'sortorder'=>$model->sortorder,
                 'executor'=>$model->executor,
                 //'open'=>true,
-                'editable'=>($userId == $model->executor),
+                'readonly'=>(!$onwer && $userId !== $model->executor),
+                //'editable'=>false,//($userId == $model->executor),
             );
             $ids[] = $model->getPrimaryKey();
         }
@@ -175,6 +177,7 @@ class GhantController extends Controller {
                 $model->description = $data['text'];
                 $model->duration = $data['duration'];
                 $model->start_date = $data['start_date']; 
+                $model->end_date = $data['end_date']; 
                 if(isset($data['progress'])) {
                     $model->progress =  $data['progress'];
                 }
@@ -203,6 +206,7 @@ class GhantController extends Controller {
         $model->duration = $data['duration'];
         $model->start_date = $data['start_date'];
         $model->parent_id = $data['parent'];
+        $model->end_date = $data['end_date']; 
         $model->progress = 0; 
         if(isset($data['executor'])) {
                     $model->executor =  $data['executor'];

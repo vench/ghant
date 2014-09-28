@@ -37,7 +37,7 @@ $this->menu=array(
 
 <h3><?php echo Yii::t('main', 'Diagram');?></h3>
 <?php 
-$this->widget('application.widgets.GhantEvent',array(
+$this->widget('application.widgets.GhantProject',array(
     'projectID'=>$model->getPrimaryKey(),
 ));
 ?>

@@ -52,9 +52,10 @@
 	<div class="clear"></div>
 
 	<div id="footer">
-		Copyright &copy; <?php echo date('Y'); ?> by My Company.<br/>
-		All Rights Reserved.<br/>
-		<?php echo Yii::powered(); ?>
+		<?php echo Yii::t('main', 'Copyright &copy; {date} by My Company.', array(
+                    '{date}'=>date('Y'),
+                )); ?>  <br/>
+		<?php echo Yii::t('main', 'All Rights Reserved.'); ?> 
 	</div><!-- footer -->
 
 </div><!-- page -->

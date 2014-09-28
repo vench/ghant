@@ -46,31 +46,36 @@ class ProjectController extends Controller
 	}
         
         /**
-         * 
+         * Query for calendar
          */
         public function actionAjaxList($start, $end) {
-            $user_id = Yii::app()->user->getId();
+            $user_id = Yii::app()->user->getId(); 
+            $conditionDate = '(start_date < :end AND end_date > :start)';
+            if(Yii::app()->db->driverName == 'sqlite') {
+                $conditionDate = '(date(start_date) < date(:end) AND date(end_date) > date(:start))';
+            }   
             $tasks = Task::model()->findAll(array(
-                'condition'=>'(project.user_id = :user_id OR t.executor =:user_id1 )',
+                'condition'=>$conditionDate
+                 .' AND (project.user_id = :user_id OR t.executor =:user_id1 )' ,               
                 'params'=>array(
-                   // ':end'=>date('Y-m-d', $end),
-                    ':user_id'=>$user_id,
-                    ':user_id1'=>$user_id,
+                   ':end'=>date('Y-m-d', $end),
+                   ':start'=>date('Y-m-d', $start),
+                   ':user_id'=>$user_id,
+                   ':user_id1'=>$user_id,
                 ),
                 'with'=>array(
                     'project'=>array(
-                        'select'=>FALSE,
+                        'select'=>'user_id',
                     ),
                 ),
             ));
-            $data=array($user_id);
-            foreach($tasks as $task) {
-                $date = strtotime($task->start_date);
+            $data=array();
+            foreach($tasks as $task) {        
                 $data[] = array(
                     'title'=>$task->description,
-                    'start'=>$date,
-                    'end'=>($date + ($task->duration * 86400)),
-                    'url'=>$this->createUrl('/project/view', array('id'=>$task->project_id)),
+                    'start'=>strtotime($task->start_date),
+                    'end'=>strtotime($task->end_date),
+                    'url'=>$this->createUrl('/project/view', array('id'=>$task->project_id)), 
                 );
             }
              echo CJSON::encode($data);

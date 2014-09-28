@@ -1,17 +1,10 @@
 <?php
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- * Description of GhantEvent
+ * Class GhantProject
  *
  * @author vench
  */
-class GhantEvent extends CWidget {
+class GhantProject extends CWidget {
     
     /**
      *
@@ -43,7 +36,19 @@ class GhantEvent extends CWidget {
      */
     public $routeProcessor = 'ghant/processor';
     
+    /**
+     *
+     * @var int Project ID 
+     */
     public $projectID = NULL;
+    
+    /**
+     *
+     * @var boolean 
+     */
+    public $readonly = false;
+
+
 
     /**
      * 
@@ -81,12 +86,29 @@ class GhantEvent extends CWidget {
         
         $cs->registerScript(__CLASS__.'#'.$this->id,
                 ' 
-                 gantt.locale.labels.section_executor = "executor";
-                 gantt.config.row_height = 24;
+                 gantt.locale.labels.section_executor = "'.Yii::t('main', 'Executor').'";
+                 gantt.locale.labels.section_progress = "'.Yii::t('main', 'Progress').'";    
+                 gantt.config.row_height = 24;                 
+                 gantt.config.readonly = '.($this->readonly ? 'true' : 'false').';
                  gantt.config.lightbox.sections.push(
                   {name: "executor", height: 22, map_to: "executor", type: "select", 
                   options:  '.$users.' }
                 );   
+                
+
+                gantt.config.lightbox.sections.push({name: "progress", height: 22, map_to: "progress", type: "select", options: [
+                        {key:"0", label: "0%"},
+                        {key:"0.1", label: "10%"},
+                        {key:"0.2", label: "20%"},
+                        {key:"0.3", label: "30%"},
+                        {key:"0.4", label: "40%"},
+                        {key:"0.5", label: "50%"},
+                        {key:"0.6", label: "60%"},
+                        {key:"0.7", label: "70%"},
+                        {key:"0.8", label: "80%"},
+                        {key:"0.9", label: "90%"},
+                        {key:"1", label: "100%"}
+                    ]});
 		 gantt.init("gantt_here");
 		 gantt.load("'.$actionLoad.'" );
                 
