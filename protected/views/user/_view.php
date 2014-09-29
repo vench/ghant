@@ -15,7 +15,7 @@
  
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('is_admin')); ?>:</b>
-	<?php echo CHtml::encode($data->is_admin); ?>
+	<?php echo CHtml::encode($data->isAdminStr()); ?>
 	<br />
 
 

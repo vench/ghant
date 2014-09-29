@@ -24,6 +24,6 @@ $this->menu=array(
 		'id',
 		'name',
 		'login', 
-		array('name'=>'is_admin', 'value'=>$model->is_admin ? 'Да' : 'Нет'),
+		array('name'=>'is_admin', 'value'=>$model->isAdminStr()),
 	),
 )); ?>

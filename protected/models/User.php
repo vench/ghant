@@ -63,7 +63,16 @@ class User extends CActiveRecord
 		);
 	}
 
-	/**
+        /**
+         * 
+         * @return string
+         */
+        public function isAdminStr() {
+            return ($this->is_admin == 1) ? Yii::t('main', 'Yes') : Yii::t('main', 'No');
+        }
+        
+
+        /**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 *
 	 * Typical usecase:

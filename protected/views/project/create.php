@@ -3,16 +3,16 @@
 /* @var $model Project */
 
 $this->breadcrumbs=array(
-	'Projects'=>array('index'),
-	'Create',
+	Yii::t('main','Projects')=>array('index'),
+	Yii::t('main','Create'),
 );
 
 $this->menu=array(
-	array('label'=>'List Project', 'url'=>array('index')),
-	array('label'=>'Manage Project', 'url'=>array('admin')),
+	array('label'=>Yii::t('main','List Project'), 'url'=>array('index')),
+	array('label'=>Yii::t('main','Manage Project'), 'url'=>array('admin')),
 );
 ?>
 
-<h1>Create Project</h1>
+<h1><?php echo Yii::t('main', 'Create Project'); ?></h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>
