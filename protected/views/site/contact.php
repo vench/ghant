@@ -20,7 +20,7 @@ $this->breadcrumbs=array(
 <?php else: ?>
 
 <p>
-If you have business inquiries or other questions, please fill out the following form to contact us. Thank you.
+<?php echo Yii::t('main', 'If you have business inquiries or other questions, please fill out the following form to contact us. Thank you.');?>
 </p>
 
 <div class="form">
@@ -69,14 +69,14 @@ If you have business inquiries or other questions, please fill out the following
 		<?php $this->widget('CCaptcha'); ?>
 		<?php echo $form->textField($model,'verifyCode'); ?>
 		</div>
-		<div class="hint">Please enter the letters as they are shown in the image above.
-		<br/>Letters are not case-sensitive.</div>
+		<div class="hint"><?php echo Yii::t('main', 'Please enter the letters as they are shown in the image above.')?>
+		<br/><?php echo  Yii::t('main', 'Letters are not case-sensitive.');?></div>
 		<?php echo $form->error($model,'verifyCode'); ?>
 	</div>
 	<?php endif; ?>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Submit'); ?>
+		<?php echo CHtml::submitButton(Yii::t('main', 'Submit')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

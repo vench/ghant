@@ -64,4 +64,13 @@ return array(
     'User is admin'=>'Пользователь администратор',
     'Delete User'=>'Удалить пользователя',
     'Manage Users'=>'Управление пользовтелями',
+    
+    'If you have business inquiries or other questions, please fill out the following form to contact us. Thank you.'=>'Если у вас есть деловое предложение или другие вопросы, пожалуйста, заполните следующую форму, чтобы связаться с нами. Спасибо.',
+    'Contact name'=>'Ваше имя',
+    'Verification Code'=>'Код проверки',
+    'Contact email'=>'Ваш email',
+    'Contact subject'=>'Тема',
+    'Contact body'=>'Текст',
+    'Letters are not case-sensitive.'=>'Буквы не чувствительны к регистру',
+    'Please enter the letters as they are shown in the image above.'=>'Пожалуйста, введите буквы, изображенные на картинке выше.',
 );

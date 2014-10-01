@@ -28,16 +28,20 @@ class ProjectController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view', 'ajaxList'),
+				'actions'=>array('index', 'ajaxList'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create'),
 				'users'=>array('@'),
+			),
+                        array('allow', // allow admin user to perform 'admin' and 'delete' actions
+				'actions'=>array('view','update'),
+				'expression' => array('ProjectController','allowEditProject')
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
+				'expression' => array('ProjectController','allowOnlyAdmin')
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -46,6 +50,15 @@ class ProjectController extends Controller
 	}
         
         /**
+         * 
+         * @return boolean
+         */
+        public function allowEditProject() {
+            $projectID  = Yii::app()->request->getParam('id');
+            return ProjectHelper::accessEditProject($projectID);
+        }
+
+         /**
          * Query for calendar
          */
         public function actionAjaxList($start, $end) {

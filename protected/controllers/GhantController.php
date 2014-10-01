@@ -15,6 +15,54 @@ class GhantController extends Controller {
     protected $xmlOutput = array();
     
     /**
+    * @return array action filters
+    */
+    public function filters()
+    {
+        return array(
+		'accessControl', // perform access control for CRUD operations 
+	);
+    }
+        
+    /**
+     * 
+     * @return array
+     */
+    public function accessRules() {
+        return array(
+            array('allow',  
+		'actions'=>array('Load'),
+		'expression' => array('GhantController','allowGhantLoad'),
+            ),
+            array('allow',  
+		'actions'=>array('Processor'),
+		'expression' => array('GhantController','allowGhantProcessor'),
+            ),
+            array('deny',  // deny all users
+		'users'=>array('*'),
+            ),
+        );
+    }
+    
+    /**
+     * 
+     * @return boolean
+     */
+    public function allowGhantLoad() {
+        $projectID  = Yii::app()->request->getParam('pid');
+        return ProjectHelper::accessViewProject($projectID);
+    }
+    
+    /**
+     * 
+     * @return boolean
+     */
+    public function allowGhantProcessor() {
+        $projectID  = Yii::app()->request->getParam('pid');
+        return ProjectHelper::accessEditProject($projectID);
+    }
+
+    /**
      * 
      * @param int $pid Project ID
      */
