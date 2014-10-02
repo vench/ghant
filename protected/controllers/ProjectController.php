@@ -39,6 +39,10 @@ class ProjectController extends Controller
 				'actions'=>array('view','update'),
 				'expression' => array('ProjectController','allowEditProject')
 			),
+                        array('allow', // allow admin user to perform 'admin' and 'delete' actions
+				'actions'=>array('view'),
+				'expression' => array('ProjectController','allowViewProject')
+			),  
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
 				'expression' => array('ProjectController','allowOnlyAdmin')
@@ -56,6 +60,14 @@ class ProjectController extends Controller
         public function allowEditProject() {
             $projectID  = Yii::app()->request->getParam('id');
             return ProjectHelper::accessEditProject($projectID);
+        }
+        
+        /**
+         * @return boolean
+         */
+        public function  allowViewProject() {
+           $projectID  = Yii::app()->request->getParam('id');
+            return ProjectHelper::accessViewProject($projectID); 
         }
 
          /**

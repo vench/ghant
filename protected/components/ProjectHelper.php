@@ -14,7 +14,8 @@
 class ProjectHelper {
     
     /**
-     * 
+     * Текущей пользователь  получает право на просмотр если:
+     * Администратор, создатель проекта, учавствует хотя бы  в одном задании
      * @param type $projectID
      * @return boolean
      */
@@ -22,16 +23,56 @@ class ProjectHelper {
          if(self::currentUserIsAdmin()) {
             return true;
         }
+         if(!is_null(Project::model()->find(array(
+            'select'=>'id',
+            'condition'=>'id=:id AND user_id=:user_id',
+            'params'=>array(
+                ':id'=>$projectID,
+                ':user_id'=>Yii::app()->user->getId(),
+        ))))) {
+            return true;
+        }
+          if(!is_null(Task::model()->find(array(
+            'select'=>'id',
+            'condition'=>' project_id=:project_id AND executor=:user_id',
+            'params'=>array( 
+                ':project_id'=>$projectID,
+                ':user_id'=>Yii::app()->user->getId(),
+             )    
+        )))) {
+            return true;
+        }
         return false;
     }
     
     /**
-     * 
+     * Получает доступ к редактированию проекту если:
+     * Администратор, содатель проекта, участник конкретного действия.
      * @param type $projectID
      * @return boolean
      */
-    public static function accessEditProject($projectID) {
+    public static function accessEditProject($projectID, $taskId = NULL) {
         if(self::currentUserIsAdmin()) {
+            return true;
+        }
+        if(!is_null(Project::model()->find(array(
+            'select'=>'id',
+            'condition'=>'id=:id AND user_id=:user_id',
+            'params'=>array(
+                ':id'=>$projectID,
+                ':user_id'=>Yii::app()->user->getId(),
+        ))))) {
+            return true;
+        }
+        if(!is_null($taskId) && !is_null(Task::model()->find(array(
+            'select'=>'id',
+            'condition'=>'id=:id  AND project_id=:project_id AND executor=:user_id',
+            'params'=>array(
+                ':id'=>$taskId,
+                ':project_id'=>$projectID,
+                ':user_id'=>Yii::app()->user->getId(),
+             )    
+        )))) {
             return true;
         }
         return false;

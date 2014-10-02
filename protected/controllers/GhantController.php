@@ -57,9 +57,8 @@ class GhantController extends Controller {
      * 
      * @return boolean
      */
-    public function allowGhantProcessor() {
-        $projectID  = Yii::app()->request->getParam('pid');
-        return ProjectHelper::accessEditProject($projectID);
+    public function allowGhantProcessor() {         
+        return TRUE;
     }
 
     /**
@@ -94,7 +93,7 @@ class GhantController extends Controller {
                 'executor'=>$model->executor,
                 //'open'=>true,
                 'readonly'=>(!$onwer && $userId !== $model->executor),
-                //'editable'=>false,//($userId == $model->executor),
+                'editable'=>($onwer || $userId == $model->executor),
             );
             $ids[] = $model->getPrimaryKey();
         }
@@ -137,6 +136,11 @@ class GhantController extends Controller {
     public function actionProcessor($pid, $editing = '', $gantt_mode = '') {
         $ids = isset($_POST['ids']) ? explode(',', $_POST['ids']) : array();
         foreach($ids as $id) {
+            //check access
+            if(!ProjectHelper::accessEditProject($pid, $id)) {
+               $this->xmlOutputError('Error access', $id); 
+               continue;
+            }
             $data = $this->loadDataByID($id); 
             $status = isset($data['!nativeeditor_status']) ? $data['!nativeeditor_status'] : '';
             $methodName = 'ghant_'. $gantt_mode.$status;
