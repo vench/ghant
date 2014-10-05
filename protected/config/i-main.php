@@ -1,7 +1,7 @@
 <?php
     return array(
         'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'Мой проект',
+	'name'=>'Ghant Project',
         'language'=>'ru', 
 	'preload'=>array('log'),
         'import'=>array(
@@ -13,12 +13,8 @@
 			'allowAutoLogin'=>true,
 		),
                 'db'=>     array(
-        'connectionString'=>'mysql:host=localhost;dbname=test',
-        'emulatePrepare' => true,
-	'username' => 'root',
-	'password' => '',
-	'charset' => 'utf8',
-    )            ,
+        'connectionString'=>'sqlite:/var/www/html/ghant/protected/data/test.db',
+    )          ,
                 'errorHandler'=>array( 
 			'errorAction'=>'site/error',
 		),

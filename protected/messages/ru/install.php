@@ -15,5 +15,9 @@ return array(
     'Site oprions'=>'Параметры сайта',
     'Data Base oprions'=>'Настройки базы данных',
     'Error connection to data base'=>'Ошибка соединения с базой данных',
+    'Success install page'=>'Сайт успешно установлен',
+    'Use default login:admin and password :admin.'=>'Для входа на сайт используте запись Имя пользователя:admin и пароль:admin. После первого захода рекомендуем изменить пароль на более сложный.',
+    'Go to main page'=>'Перейти на главную страницу',
+    'We thank you for using our app.'=>'Спасибо за то что используете наше приложение.',
 );
 

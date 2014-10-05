@@ -12,13 +12,27 @@ class InstallController extends Controller {
 
 
     /**
+    * @return array action filters
+    */
+    public function filters()
+    {
+        return array(
+		'accessControl', // perform access control for CRUD operations 
+	);
+    }
+    
+    /**
      * 
      * @return array
      */
     public function accessRules() {
         return array( 
+            array('allow',
+                'actions'=>array('success'),
+                'users'=>array('*'),
+            ),
             array('allow',  
-		'actions'=>array('index'),
+		'actions'=>array('index',),
 		'expression' => array('InstallController','allowInstall'),
             ),
             array('deny',  // deny all users
@@ -32,9 +46,13 @@ class InstallController extends Controller {
      * @return boolean
      */
     public function allowInstall() {
-        return TRUE;
+        $patch = Yii::getPathOfAlias('application.config').DIRECTORY_SEPARATOR.'i-main.php';       
+        return !file_exists($patch);
     }
     
+    /**
+     * 
+     */
     public function actionSuccess() {
         $this->render('success');
     }
