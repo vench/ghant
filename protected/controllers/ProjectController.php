@@ -99,7 +99,7 @@ class ProjectController extends Controller
                 $data[] = array(
                     'title'=>$task->description,
                     'start'=>strtotime($task->start_date),
-                    'end'=>strtotime($task->end_date),
+                    'end'=>strtotime($task->end_date)-1,
                     'url'=>$this->createUrl('/project/view', array('id'=>$task->project_id)), 
                 );
             }
