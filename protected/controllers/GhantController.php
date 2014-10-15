@@ -32,11 +32,11 @@ class GhantController extends Controller {
         return array(
             array('allow',  
 		'actions'=>array('Load'),
-		'expression' => array('GhantController','allowGhantLoad'),
+		'expression' => array($this,'allowGhantLoad'),
             ),
             array('allow',  
 		'actions'=>array('Processor'),
-		'expression' => array('GhantController','allowGhantProcessor'),
+		'expression' => array($this,'allowGhantProcessor'),
             ),
             array('deny',  // deny all users
 		'users'=>array('*'),
