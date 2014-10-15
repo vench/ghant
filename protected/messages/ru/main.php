@@ -64,6 +64,7 @@ return array(
     'User is admin'=>'Пользователь администратор',
     'Delete User'=>'Удалить пользователя',
     'Manage Users'=>'Управление пользовтелями',
+    'Password changed'=>'Пароль был изменен',
     
     'If you have business inquiries or other questions, please fill out the following form to contact us. Thank you.'=>'Если у вас есть деловое предложение или другие вопросы, пожалуйста, заполните следующую форму, чтобы связаться с нами. Спасибо.',
     'Contact name'=>'Ваше имя',
