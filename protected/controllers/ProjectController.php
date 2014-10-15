@@ -37,15 +37,15 @@ class ProjectController extends Controller
 			),
                         array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('view','update'),
-				'expression' => array('ProjectController','allowEditProject')
+				'expression' => array($this,'allowEditProject')
 			),
                         array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('view'),
-				'expression' => array('ProjectController','allowViewProject')
+				'expression' => array($this,'allowViewProject')
 			),  
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
-				'expression' => array('ProjectController','allowOnlyAdmin')
+				'expression' => array($this,'allowOnlyAdmin')
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
