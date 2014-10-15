@@ -33,7 +33,7 @@ class InstallController extends Controller {
             ),
             array('allow',  
 		'actions'=>array('index',),
-		'expression' => array('InstallController','allowInstall'),
+		'expression' => array($this,'allowInstall'),
             ),
             array('deny',  // deny all users
 		'users'=>array('*'),
