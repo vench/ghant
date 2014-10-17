@@ -2,6 +2,8 @@
 /* @var $this ProjectController */
 /* @var $model Project */
 
+Yii::app()->clientScript->registerCoreScript('cookie');
+
 $this->breadcrumbs=array(
 	Yii::t('main','Projects')=>array('index'),
 	$model->name,
@@ -23,6 +25,8 @@ $this->menu=array(
 
 <h1><?php echo Yii::t('main', 'View Project');?> #<?php echo $model->name; ?></h1>
 
+<a href="#!" class="fullScreen"><?php echo Yii::t('main', 'Full screen');?></a>
+
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(		 
@@ -42,3 +46,21 @@ $this->widget('application.widgets.GhantProject',array(
     'readonly'=> !ProjectHelper::accessEditProject($model->getPrimaryKey()),
 ));
 ?>
+
+<script type="text/javascript">
+$(function(){ console.log(1);
+    function checkFullScreen() {        
+        if($.cookie('fullscreen') == 1) {
+            $('#page').addClass('fullscreen');
+        } else {
+            $('#page').removeClass('fullscreen');
+        }
+    }
+    $('.fullScreen').click(function(){  
+        $.cookie('fullscreen', $('#page').hasClass('fullscreen') ? 0 : 1);
+        checkFullScreen();
+        return false;
+    });
+    checkFullScreen();
+});
+</script>

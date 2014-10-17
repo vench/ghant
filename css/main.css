@@ -227,3 +227,7 @@ div.search-form
 {
 	background: #80CFFF;
 }
+
+.container.fullscreen {
+    width:100%; height: 100%;
+}

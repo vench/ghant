@@ -66,6 +66,8 @@ return array(
     'Manage Users'=>'Управление пользовтелями',
     'Password changed'=>'Пароль был изменен',
     
+    'Full screen'=>'Полный экран',
+    
     'If you have business inquiries or other questions, please fill out the following form to contact us. Thank you.'=>'Если у вас есть деловое предложение или другие вопросы, пожалуйста, заполните следующую форму, чтобы связаться с нами. Спасибо.',
     'Contact name'=>'Ваше имя',
     'Verification Code'=>'Код проверки',
